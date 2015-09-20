@@ -35,17 +35,19 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
     echo 'Setting up system dependencies.'
     # nginx (the default version in the Ubuntu PPA is very old and doesn't support add_header on non-200 status responses).
-    add-apt-repository -y ppa:nginx/development
+    [ -f /etc/apt/sources.list.d/nginx-development-trusty.list ] \
+      || add-apt-repository -y ppa:nginx/development
     # ffmpeg (replaced by libav in the default Ubuntu PPA):
-    add-apt-repository -y ppa:mc3man/trusty-media
+    [ -f /etc/apt/sources.list.d/mc3man-trusty-media-trusty.list ] \
+      || add-apt-repository -y ppa:mc3man/trusty-media
     apt-get update
     [ -f /usr/bin/git ] || apt-get install git -y
     [ -f /usr/bin/puppet ] || apt-get install puppet -y
 
     echo 'Setting up Node dependencies that are not yet install via Puppet.'
-    apt-get install npm -y
-    npm install -g grunt-cli
-    ln -s /usr/bin/nodejs /usr/bin/node
+    [ -f /usr/bin/npm ] || apt-get install npm -y
+    npm ls -g 2>&1 | grep -q "grunt-cli" || npm install -g grunt-cli
+    [ -f /usr/bin/node ] || ln -s /usr/bin/nodejs /usr/bin/node
 
     echo 'Starting Puppet.'
     cd /root/puppet
