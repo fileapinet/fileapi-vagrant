@@ -40,6 +40,9 @@ Vagrant.configure(2) do |config|
     # ffmpeg (replaced by libav in the default Ubuntu PPA):
     [ -f /etc/apt/sources.list.d/mc3man-trusty-media-trusty.list ] \
       || add-apt-repository -y ppa:mc3man/trusty-media
+    # fontforge (to get a recent version instead of a 2012 version):
+    [ -f /etc/apt/sources.list.d/fontforge-fontforge-trusty.list ] \
+      || add-apt-repository -y ppa:fontforge/fontforge
     apt-get update
     [ -f /usr/bin/git ] || apt-get install git -y
     [ -f /usr/bin/puppet ] || apt-get install puppet -y
