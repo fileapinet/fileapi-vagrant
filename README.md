@@ -11,7 +11,7 @@ Then, run `vagrant up`. This will provision a Vagrant box which you can SSH to v
 
 Add to your `/etc/hosts`:
 
-    192.168.20.10  api.fileapi.dev
+    192.168.20.10  api.fileapi.dev demo-api.fileapi.dev
     192.168.20.10  fileapi.dev www.fileapi.dev
     192.168.20.10  files.fileapi.dev
 
