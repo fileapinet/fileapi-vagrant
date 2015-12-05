@@ -14,7 +14,7 @@ Vagrant.configure(2) do |config|
     owner: "fileapi",
     group: "fileapi",
     rsync__auto: true,
-    rsync__exclude: ["vagrant2015*", "d2015*"]
+    rsync__exclude: ["vagrant2015*", "d2015*", ".git"]
 
   config.vm.synced_folder "./api", "/home/fileapi/project/api/current",
     type: "rsync",
@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
     owner: "fileapi",
     group: "fileapi",
     rsync__auto: true,
-    rsync__exclude: ["var/", "vagrant2015*", "d2015*"]
+    rsync__exclude: ["var/", "vagrant2015*", "d2015*", ".git"]
 
   config.vm.synced_folder "./puppet", "/root/puppet",
     type: "nfs"
