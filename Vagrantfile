@@ -43,7 +43,13 @@ Vagrant.configure(2) do |config|
     # fontforge (to get a recent version instead of a 2012 version):
     [ -f /etc/apt/sources.list.d/fontforge-fontforge-trusty.list ] \
       || add-apt-repository -y ppa:fontforge/fontforge
+
+    [ -f /usr/bin/mongo ] || apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+    [ -f /usr/bin/mongo ] || echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" \
+      | tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+
     apt-get update
+
     [ -f /usr/bin/git ] || apt-get install git -y
     [ -f /usr/bin/puppet ] || apt-get install puppet -y
 
